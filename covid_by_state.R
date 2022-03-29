@@ -7,6 +7,7 @@ library(ggtext)
 library(showtext)
 font_add_google(name = "Oswald", family = "Oswald")
 showtext_auto()
+showtext_opts(dpi = 300)
 
 df <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/rolling-averages/us-states.csv")
 df2 <- df %>% 
@@ -41,8 +42,8 @@ ggplot(data=df2, aes(x=date, y=value, fill=name))+
     scale_fill_manual(name=NULL, 
                        values = c("casese_ma2"="#ff9999", 'deaths_ma2'='#808080'))+
     theme(legend.position = "none",
-        plot.title = element_text(family = "Oswald", colour = '#1369CB', lineheight = 1.2, size = 16),
-        plot.subtitle = element_markdown(lineheight = 1.1, size = 14, face = "italic", ),
+        plot.title = element_text(family = "Oswald", colour = '#1369CB', lineheight = 1.2, size = 14),
+        plot.subtitle = element_markdown(lineheight = 1.1, size = 12, face = "italic", ),
         strip.text = element_text(family = "Oswald",size = 10),
         axis.title.y = element_text(family = "Oswald",size = 12),
         axis.title.x = element_text(family = "Oswald",size = 12),
@@ -51,6 +52,6 @@ ggplot(data=df2, aes(x=date, y=value, fill=name))+
         # legend.text = element_text(family = "Oswald",size = font_size)
     )
 
-
+ggsave("covid_by_state.png", bg = "white", dpi = 300)
   
 
